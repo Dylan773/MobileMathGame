@@ -24,7 +24,6 @@
             android:id="@+id/textViewQuestionText"
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:text="fgdhsfggsfh"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -39,6 +38,7 @@
     </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="297dp">
 

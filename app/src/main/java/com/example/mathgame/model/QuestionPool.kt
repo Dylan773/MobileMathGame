@@ -5,6 +5,7 @@ import android.content.Context
 class QuestionPool(context: Context) {
 
     private val dbHelper: MathDataBase = MathDataBase(context)
+
     //private val questionIDList: ArrayList<>
     private val questionList: ArrayList<Question>
     private val answerList: ArrayList<Answer>
@@ -48,8 +49,9 @@ class QuestionPool(context: Context) {
         val choseQuestion = topicList.get(0) // Obtains the first question in the randomised list
         questionList.remove(choseQuestion) // Removes the question from the main list so its not re-used
 
-        return  choseQuestion
+        return choseQuestion
     }
+
 
     /**
      * Returns the currents questions description.
@@ -85,11 +87,9 @@ class QuestionPool(context: Context) {
         q.add(addRandomQuestionByTopic(7))
         q.add(addRandomQuestionByTopic(7))
 
-        q.shuffle() // Randomise all 14 questions
-        //addall?
+        q.shuffle() // Randomise all 14 chosen questions
         return q
     }
-
 
 
     /**
