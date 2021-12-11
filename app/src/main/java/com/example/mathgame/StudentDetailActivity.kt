@@ -1,5 +1,6 @@
 package com.example.mathgame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,8 +15,13 @@ class StudentDetailActivity : AppCompatActivity() {
 
     fun startGame(view: View) {
         val studentName = findViewById<EditText>(R.id.editTextStudentName)
+        //val intent = Intent(this, GameScreenActivity::class.java)
+        val intent = Intent(this, QuizScreenActivity::class.java)
+        startActivity(intent)
 //        if (studentName.text.isEmpty())
-//            Toast.makeText(this, )
-        // button validation (no empty name) - findByViewId(textView)
+//            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show()
+//        else
+//        startActivity(intent)
+        //save name
     }
 }

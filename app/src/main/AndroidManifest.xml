@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathGame">
         <activity
+            android:name=".QuizScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".GameCompleteActivity"
             android:exported="false" />
         <activity
@@ -18,7 +21,7 @@
         <activity
             android:name=".StudentDetailActivity"
             android:exported="false"
-            android:parentActivityName=".StartScreenActivity"/>
+            android:parentActivityName=".StartScreenActivity" />
         <activity
             android:name=".StartScreenActivity"
             android:exported="true">

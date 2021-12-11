@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.view.View
 import android.widget.EditText
+import com.example.mathgame.model.Answer
+import com.example.mathgame.model.Question
+import com.example.mathgame.model.QuestionPool
 
 class StartScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,7 +14,7 @@
     <string name="gameInfoSubtitle"><u>Game Information</u></string>
     <string name="game_description">Each game consists of 14 mathematical questions, covering 7 topics. Questions are presented in a multiple choice format, with only one correct answer.
         \n\nEach question has a time limit, so make sure to answer before time is up! Please complete all questions as progress is not saved.
-        \n\nFinally, Have Fun!
+        \n\nHave Fun!
     </string>
     <string name="btnStart">start</string>
 
@@ -23,7 +23,6 @@
 
 
     <!-- Game End Activity -->
-
 
 
 </resources>
