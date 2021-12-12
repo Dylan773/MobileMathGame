@@ -14,6 +14,7 @@ class StudentDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_student_detail)
     }
 
+    //TODO - change the description (timer) if not implemented
     fun startGame(view: View) {
         studentName = findViewById<EditText>(R.id.editTextStudentName).toString()
         //val intent = Intent(this, GameScreenActivity::class.java)

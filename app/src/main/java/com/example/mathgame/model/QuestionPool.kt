@@ -2,6 +2,7 @@ package com.example.mathgame.model
 
 import android.content.Context
 
+//TODO - set the game answers here? so the gameQuiz screen doesnt call all game answers
 class QuestionPool(context: Context) {
 
     private val dbHelper: MathDataBase = MathDataBase(context)
@@ -33,7 +34,15 @@ class QuestionPool(context: Context) {
     }
 
     /**
+     * Accepts a questionTopicID (Int) value for comparison.
+     * Compares the provided value to all questions in the questionList that contain that value as
+     * their topicID.
      *
+     * Adds all relevant questions to an ArrayList and shuffles that list, returning one question
+     * from the list.
+     *
+     * @param questionTopicID The value to be compared with each question's topicID.
+     * @return A randomised Question that matches the topicID.
      */
     private fun addRandomQuestionByTopic(questionTopicID: Int): Question {
         val topicList = ArrayList<Question>()
@@ -54,7 +63,12 @@ class QuestionPool(context: Context) {
 
 
     /**
-     * Returns the currents questions description.
+     * Accepts a questionID (Int) value, returning the relevant question's topic description.
+     *
+     * Uses the questionID's value (-1) to obtain the appropriate question's description from the
+     * questionID ArrayList.
+     *
+     * @param questionID The Int value to be compared in the ArrayList
      */
     fun getQuestionTopicDesc(questionID: Int): String {
         return questionIDList.get(questionID - 1).questionDescription // starts a 0 so - 1
@@ -91,11 +105,4 @@ class QuestionPool(context: Context) {
         return q
     }
 
-
-    /**
-     * TODO - this
-     */
-//    fun getCorrectAnswer(question: Question): Answer {
-//
-//    }
 }
