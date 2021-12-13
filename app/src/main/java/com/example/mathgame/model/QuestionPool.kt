@@ -35,11 +35,12 @@ class QuestionPool(context: Context) {
 
     /**
      * Accepts a questionTopicID (Int) value for comparison.
-     * Compares the provided value to all questions in the questionList that contain that value as
-     * their topicID.
      *
-     * Adds all relevant questions to an ArrayList and shuffles that list, returning one question
-     * from the list.
+     * Iterates through all application questions, obtaining and adding each question where the
+     * questions' topicID matches the provided argument to an ArrayList.
+     *
+     * The ArrayList is then shuffled to randomise the order of questions, a question is then
+     * extracted and removed from that list. Returning the chosen question.
      *
      * @param questionTopicID The value to be compared with each question's topicID.
      * @return A randomised Question that matches the topicID.
@@ -56,7 +57,7 @@ class QuestionPool(context: Context) {
         topicList.shuffle() // Randomise the list
 
         val choseQuestion = topicList.get(0) // Obtains the first question in the randomised list
-        questionList.remove(choseQuestion) // Removes the question from the main list so its not re-used
+        questionList.remove(choseQuestion) // Removes the question from the main list so its not re-called
 
         return choseQuestion
     }
@@ -68,14 +69,16 @@ class QuestionPool(context: Context) {
      * Uses the questionID's value (-1) to obtain the appropriate question's description from the
      * questionID ArrayList.
      *
-     * @param questionID The Int value to be compared in the ArrayList
+     * @param questionID The Int value to be compared in the ArrayList.
+     * @return The question's topic description.
      */
     fun getQuestionTopicDesc(questionID: Int): String {
         return questionIDList.get(questionID - 1).questionDescription // starts a 0 so - 1
     }
 
     /**
-     *
+     * @return An ArrayList containing 14 randomised questions, 2 per topic
+     * @see addRandomQuestionByTopic
      */
     fun setGameQuestions(): ArrayList<Question> {
         val q = ArrayList<Question>()
@@ -104,5 +107,4 @@ class QuestionPool(context: Context) {
         q.shuffle() // Randomise all 14 chosen questions
         return q
     }
-
 }

@@ -16,8 +16,7 @@ class QuizScreenActivity : AppCompatActivity() {
     lateinit var answerList: ArrayList<Answer>
 
     var index: Int = 0
-    val questionLimit: Int = 14 //TODO - change this dynamically
-
+    //val radioGroup: RadioGroup = findViewById(com.example.mathgame.R.id.radioGroup)
 
     //move
     lateinit var gameQuestions: ArrayList<Question>
@@ -29,21 +28,22 @@ class QuizScreenActivity : AppCompatActivity() {
 
     //var radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
 
-    // TODO - create an array list that obtains all the relevant answers and print each one in a text view to see if theres any duplicates
+
     //TODO set progress bar value
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_screen)
 
+        // Database Initialisation
         questionPool = QuestionPool(this)
         gameQuestions = questionPool.setGameQuestions()
+        answerList = questionPool.getAnswerList()
         //gameAnswers = questionPool.getQuestionAnswers()
-        answerList = questionPool.getAnswerList() // TODO
 
         //TODO
         currentQuestionID = gameQuestions.get(index).questionTypeID
-        currentQuestionNo =
-            gameQuestions.get(index).questionNumber // The questions number in the database
+        currentQuestionNo = gameQuestions.get(index).questionNumber // The questions number in the database
+        //radioGroup = findViewById(com.example.mathgame.R.id.radioGroup) // TODO - remove in not necessary
 
         // Topic TextView
         findViewById<TextView>(R.id.textViewCurrentTopic).text =
@@ -57,20 +57,21 @@ class QuizScreenActivity : AppCompatActivity() {
         findViewById<ProgressBar>(R.id.progressBar).max = gameQuestions.size
         findViewById<ProgressBar>(R.id.progressBar).setProgress(index + 1, true)
 
-        // RadioButtons
-//        findViewById<RadioButton>(R.id.option1).text = "1"
-//        findViewById<RadioButton>(R.id.option2).text = "2"
-//        findViewById<RadioButton>(R.id.option3).text = "3"
-//        findViewById<RadioButton>(R.id.option4).text = "4"
-//        findViewById<RadioButton>(R.id.option5).text = "5"
-        //populateOptionsTst()
+        // RadioButtons'
         populateRadioButtons()
 
     }
 
 
+    /**
+     * Allows the radio buttons' text to be randomised on each question, with the correct option
+     * not being static throughout the application.
+     */
     fun populateRadioButtons() {
         val filteredAnswers = ArrayList<Answer>()
+
+        // Iterates through all application answers, extracting answers only applicable to the
+        // current question
         for (ans in answerList)
             if (ans.questionNumberID == gameQuestions.get(index).questionNumber)
                 filteredAnswers.add(ans)
@@ -83,9 +84,11 @@ class QuizScreenActivity : AppCompatActivity() {
             "seven" to filteredAnswers[6].answerText, "eight" to filteredAnswers[7].answerText
         )
 
+        // Extract the correct answer, and remove that answer from the filtered answer pool
         val correctAnswer: Answer = filteredAnswers.filter { it.isCorrect == 1 }[0]
-        filteredAnswers.remove(correctAnswer) // Remove the correct answer from the remaining pool
+        filteredAnswers.remove(correctAnswer)
 
+        // Assign an ArrayList of randomised answers, allowing t
         val setAnswerOptions = ArrayList<Answer>()
         setAnswerOptions.add(correctAnswer) // Add the correct answer to the selection pool
         setAnswerOptions.add(filteredAnswers[0]) // Add 4 randomised answers (in-correct) to the options pool
@@ -110,6 +113,7 @@ class QuizScreenActivity : AppCompatActivity() {
      */
     fun buttonSubmit(view: View) {
         if (findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId != -1 && index + 1 != gameQuestions.size) {
+            //findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId != -1 && index + 1 != gameQuestions.size
             index++
             currentQuestionID = gameQuestions.get(index).questionTypeID
 
@@ -131,7 +135,7 @@ class QuizScreenActivity : AppCompatActivity() {
         } else {
 //            val intent = Intent(this, StartScreenActivity::class.java)
 //            startActivity(intent) // change to result screen
-            Toast.makeText(this, "Please select an option", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
             // upon final question, use putExtra to transfer user name???
         }
     }

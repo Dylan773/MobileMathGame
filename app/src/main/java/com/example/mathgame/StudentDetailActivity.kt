@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import java.lang.NullPointerException
 
+/**
+ *
+ */
 class StudentDetailActivity : AppCompatActivity() {
     var studentName: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,46 +19,25 @@ class StudentDetailActivity : AppCompatActivity() {
     }
 
     //TODO - change the description (timer) if not implemented
+    /**
+     *
+     */
     fun startGame(view: View) {
-        studentName = findViewById<EditText>(R.id.editTextStudentName).toString()
-        //val intent = Intent(this, GameScreenActivity::class.java)
-        val intent = Intent(this, QuizScreenActivity::class.java)
-        startActivity(intent)
-//        if (studentName.text.isEmpty())
-//            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show()
-//        else
-//        studentName = findViewById<EditText>(R.id.editTextStudentName).toString()
-//        startActivity(intent)
-        //save name
+        try {
+            studentName = findViewById<EditText>(R.id.editTextStudentName).text.toString()
 
+            // Student name null check
+            if (studentName.isEmpty())
+                throw NullPointerException("Name not entered")
 
+            // If name is not null, then start the next activity
+            val intent = Intent(this, QuizScreenActivity::class.java)
+            startActivity(intent)
+
+        } catch (exception: NullPointerException) {
+            val toast = Toast.makeText(this, exception.message, Toast.LENGTH_SHORT)
+            toast.show()
+        }
     }
-
-
-
-
-
-
-    //    val firstName = findViewById<EditText>(R.id.editTextPersonFName)
-//    val lastName = findViewById<EditText>(R.id.editTextPersonLName)
-//    val salary = findViewById<EditText>(R.id.editTextSalary)
-//    val textNoOfEmployee = findViewById<TextView>(R.id.textViewNoOfEmployee)
-//
-//    try {
-//        val myEmployee = Employee(firstName.text.toString(), lastName.text.toString(), salary.text.toString().toFloat()) // create new employee object
-//        myEmployeeList.addEmployee(myEmployee) // add employee to employee list
-//        textNoOfEmployee.text = "No Of Employee: " + myEmployeeList.getNoOfEmployee()
-//
-//        firstName.text.clear()
-//        lastName.text.clear()
-//        salary.text.clear()
-//    }
-//    catch(e: NumberFormatException) {
-//        val toast = Toast.makeText(applicationContext, "Salary not accepted", Toast.LENGTH_LONG)
-//        toast.show()
-//    }
-//    catch(e: IllegalArgumentException) {
-//        val toast = Toast.makeText(applicationContext, e.message, Toast.LENGTH_LONG)
-//        toast.show()
-//    }
 }
+
