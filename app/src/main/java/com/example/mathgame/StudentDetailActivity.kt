@@ -3,6 +3,8 @@ package com.example.mathgame
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -12,7 +14,11 @@ import java.lang.NullPointerException
  *
  */
 class StudentDetailActivity : AppCompatActivity() {
-    var studentName: String = ""
+    //var studentName: String = ""
+    companion object { var studentName = "" }
+    /**
+     *
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_detail)
@@ -31,7 +37,10 @@ class StudentDetailActivity : AppCompatActivity() {
                 throw NullPointerException("Name not entered")
 
             // If name is not null, then start the next activity
-            val intent = Intent(this, QuizScreenActivity::class.java)
+            //val sName = studentName
+            val intent = Intent(this, QuizScreenActivity::class.java).apply {
+                putExtra("STUDENT_NAME", studentName)
+            }
             startActivity(intent)
 
         } catch (exception: NullPointerException) {
@@ -40,4 +49,8 @@ class StudentDetailActivity : AppCompatActivity() {
         }
     }
 }
-
+//val message: String = playerScore.toString()
+//val intent = Intent(this, QuizResultActivity::class.java).apply {
+//    putExtra(AlarmClock.EXTRA_MESSAGE, message)
+//}
+//startActivity(intent)

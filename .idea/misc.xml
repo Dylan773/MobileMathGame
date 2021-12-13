@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_game_complete.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_game_screen.xml" value="0.49331103678929766" />
         <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_main.xml" value="0.48777173913043476" />
-        <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_quiz_screen.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_quiz_result.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_quiz_screen.xml" value="0.5" />
         <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_start_screen.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Dylan/Documents/GitHub/MobileMathGame/app/src/main/res/layout/activity_student_detail.xml" value="0.5" />
       </map>

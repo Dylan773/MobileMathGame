@@ -2,15 +2,14 @@ package com.example.mathgame.model
 
 import android.content.Context
 
-//TODO - set the game answers here? so the gameQuiz screen doesnt call all game answers
+
 class QuestionPool(context: Context) {
 
     private val dbHelper: MathDataBase = MathDataBase(context)
-
-    //private val questionIDList: ArrayList<>
+    private val questionIDList: ArrayList<QuestionID>
     private val questionList: ArrayList<Question>
     private val answerList: ArrayList<Answer>
-    private val questionIDList: ArrayList<QuestionID>
+
 
 
     init {
@@ -32,6 +31,22 @@ class QuestionPool(context: Context) {
     fun getAnswerList(): ArrayList<Answer> {
         return answerList
     }
+
+
+    /**
+     * Accepts a questionID (Int) value, returning the relevant question's topic description.
+     *
+     * Uses the questionID's value (-1) to obtain the appropriate question's description from the
+     * questionID ArrayList.
+     *
+     * @param questionID The Int value to be compared in the ArrayList.
+     * @return The question's topic description.
+     */
+    fun getQuestionTopicDesc(questionID: Int): String {
+        // ArrayList starts at index 0 so - 1
+        return questionIDList.get(questionID - 1).questionDescription
+    }
+
 
     /**
      * Accepts a questionTopicID (Int) value for comparison.
@@ -62,19 +77,6 @@ class QuestionPool(context: Context) {
         return choseQuestion
     }
 
-
-    /**
-     * Accepts a questionID (Int) value, returning the relevant question's topic description.
-     *
-     * Uses the questionID's value (-1) to obtain the appropriate question's description from the
-     * questionID ArrayList.
-     *
-     * @param questionID The Int value to be compared in the ArrayList.
-     * @return The question's topic description.
-     */
-    fun getQuestionTopicDesc(questionID: Int): String {
-        return questionIDList.get(questionID - 1).questionDescription // starts a 0 so - 1
-    }
 
     /**
      * @return An ArrayList containing 14 randomised questions, 2 per topic

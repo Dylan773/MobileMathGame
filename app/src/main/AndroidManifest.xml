@@ -10,13 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathGame">
         <activity
+            android:name=".QuizResultActivity"
+            android:exported="false"
+            android:parentActivityName=".StudentDetailActivity"/>
+        <activity
             android:name=".QuizScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GameCompleteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GameScreenActivity"
             android:exported="false" />
         <activity
             android:name=".StudentDetailActivity"
