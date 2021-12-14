@@ -23,7 +23,7 @@
     <string name="topic"><u>Topic!</u></string>
 
     <!-- Game End Activity -->
-    <string name="resultTitle"><u>Result</u></string>
+    <string name="resultTitle"><u>Quiz Complete</u></string>
     <string name="btn_MainMenu">Main Menu</string>
 
 </resources>

@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/textViewResultTitle"
         android:layout_width="match_parent"
-        android:layout_height="79dp"
+        android:layout_height="55dp"
         android:text="@string/resultTitle"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -20,8 +20,15 @@
     <TextView
         android:id="@+id/textViewPlayerOverview"
         android:layout_width="match_parent"
-        android:layout_height="83dp"
-        android:text="TextView"
+        android:layout_height="44dp"
         android:textAlignment="center"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/buttonHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonMainMenu"
+        android:text="@string/btn_MainMenu" />
+
 </LinearLayout>

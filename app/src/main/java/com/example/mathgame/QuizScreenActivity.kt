@@ -22,7 +22,8 @@ class QuizScreenActivity : AppCompatActivity() {
     var playerScore: Int = 0
 
     /**
-     *
+     * Upon activity creation, the question pool is initialised with data obtained from the
+     * database and populates the view, displaying the first question to the user.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +54,47 @@ class QuizScreenActivity : AppCompatActivity() {
         populateRadioButtons()
     }
 
+    /**
+     * Nested if statement
+     */
+    fun buttonSubmit(view: View) {
+        if (findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId != -1) { // if an option has been selected
+            if (index + 1 != gameQuestions.size) {
+                index++
+                currentQuestionID = gameQuestions.get(index).questionTypeID
+
+                // Checks if the selected option is correct before the next question is displayed
+                checkScore()
+
+                /* Setting the view for the next question */
+                findViewById<TextView>(R.id.textViewCurrentTopic).text =
+                    "Topic: ${questionPool.getQuestionTopicDesc(currentQuestionID)}"
+
+                findViewById<TextView>(R.id.textViewQuestionText).text =
+                    gameQuestions.get(index).questionText
+
+                findViewById<ProgressBar>(R.id.progressBar).progress = index + 1
+
+                findViewById<TextView>(R.id.textViewQuestionCount).text =
+                    "${index + 1}/${gameQuestions.size}"
+
+                populateRadioButtons()
+
+            } else { // If the last question is currently displayed
+                val message: String = playerScore.toString()
+                val intent = Intent(this, QuizResultActivity::class.java).apply {
+                    putExtra("PLAYER_SCORE", message)
+                }
+                startActivity(intent)
+            }
+        } else // If the user has not selected a RadioButton
+            Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
+    }
+
 
     /**
      * Allows the radio buttons' text to be randomised on each question, with the correct option
-     * not being statically  displayed throughout the session.
+     * not being statically displayed throughout the session.
      *
      * Iterates through all stored answers', extracting each answer where the answer's
      * questionNumberID matches the current question's number ID, adding each answer to a filtered
@@ -111,44 +149,6 @@ class QuizScreenActivity : AppCompatActivity() {
     }
 
     /**
-     * Nested if statement
-     */
-    fun buttonSubmit(view: View) { // TODO - try catch
-        if (findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId != -1) { // if option is checked
-            if (index + 1 != gameQuestions.size) {
-                index++
-                currentQuestionID = gameQuestions.get(index).questionTypeID
-
-                // Checks if the selected option is correct before the next question is displayed
-                checkScore()
-
-                /* Next Question */
-                findViewById<TextView>(R.id.textViewCurrentTopic).text =
-                    "Topic: ${questionPool.getQuestionTopicDesc(currentQuestionID)}"
-
-                findViewById<TextView>(R.id.textViewQuestionText).text =
-                    gameQuestions.get(index).questionText
-
-                findViewById<ProgressBar>(R.id.progressBar).progress = index + 1
-
-                findViewById<TextView>(R.id.textViewQuestionCount).text =
-                    "${index + 1}/${gameQuestions.size}"
-
-                populateRadioButtons()
-
-            } else { // If the last question is currently displayed
-                val message: String = playerScore.toString()
-                val intent = Intent(this, QuizResultActivity::class.java).apply {
-                    putExtra("PLAYER_SCORE", message)
-                }
-                startActivity(intent)
-            }
-        } else // If the user has not selected a RadioButton
-            Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
-    }
-
-
-    /**
      * Obtains the texts of the currently selected RadioButton and the current question's answer,
      * and compares both values for equality.
      *
@@ -163,12 +163,7 @@ class QuizScreenActivity : AppCompatActivity() {
             playerScore++
     }
 
-    //    val editText = findViewById<EditText>(R.id.editTextTextPersonName)
-//    val message = editText.text.toString()
-//    val intent = Intent(this, DisplayMessageActivity::class.java).apply {
-//        putExtra(AlarmClock.EXTRA_MESSAGE, message)
-//    }
-//    startActivity(intent)
+    //TODO - fix score issue
 
     //        val correctAnswer: Answer = filteredAnswers.filter { it.isCorrect == 1 }[0]
 //        filteredAnswers.remove(correctAnswer)
