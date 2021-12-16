@@ -1,3 +1,32 @@
 <resources>
+    <!-- Starting Activity -->
     <string name="app_name">MathGame</string>
+    <string name="game_title">Mobile Math</string>
+    <string name="game_subtitle">Educational Quiz Game for Students</string>
+    <string name="btn_student">Student</string>
+    <string name="btn_teacher">Teacher</string>
+
+    <!-- Student Detail Activity -->
+    <string name="welcome">Welcome!</string>
+    <string name="welcome_intro">Test your knowledge with a fun quiz!</string>
+    <string name="studentDetailsSubtitle"><u>Student Details</u></string>
+    <string name="enterName">Please enter your name:</string>
+    <string name="gameInfoSubtitle"><u>Game Information</u></string>
+    <string name="game_description">Each game consists of 14 mathematical questions, covering 7 topics. Questions are presented in a multiple choice format, with only one correct answer.
+        \n\nEach question has a time limit, so make sure to answer before time is up! Please complete all questions as progress is not saved.
+        \n\nHave Fun!
+    </string>
+    <string name="btnStart">start</string>
+
+
+    <!-- Game Screen Activity -->
+    <string name="topic"><u>Topic!</u></string>
+
+    <!-- Game End Activity -->
+    <string name="resultTitle"><u>Quiz Complete</u></string>
+    <string name="info">
+        \nView detailed information about your score below.
+    \nInteract with the pie chart to view specific details about your quiz session.</string>
+    <string name="btn_MainMenu">Main Menu</string>
+
 </resources>
