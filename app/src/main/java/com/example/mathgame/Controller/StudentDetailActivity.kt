@@ -1,13 +1,12 @@
-package com.example.mathgame
+package com.example.mathgame.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.mathgame.R
 import java.lang.NullPointerException
 
 /**

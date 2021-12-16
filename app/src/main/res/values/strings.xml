@@ -18,7 +18,6 @@
     </string>
     <string name="btnStart">start</string>
 
-
     <!-- Game Screen Activity -->
     <string name="topic"><u>Topic!</u></string>
 
@@ -26,7 +25,21 @@
     <string name="resultTitle"><u>Quiz Complete</u></string>
     <string name="info">
         \nView detailed information about your score below.
-    \nInteract with the pie chart to view specific details about your quiz session.</string>
+        \nInteract with the pie chart to view specific details about your quiz session.</string>
     <string name="btn_MainMenu">Main Menu</string>
+
+    <!-- Admin Login Screen -->
+    <string name="adminLogin"><u>Admin</u></string>
+    <string name="adminDesc">Enter your user name and password to gain access to the question screen.
+        The following screen will allow you to add new game questions for students.
+    \n\nNote: Password is case sensitive</string>
+    <string name="userName">User name:</string>
+    <string name="password">Password:</string>
+    <string name="passwordPrompt">Note: Password is case sensitive</string>
+    <string name="btn_Login">Login</string>
+
+
+    <!-- Admin Question Screen -->
+
 
 </resources>

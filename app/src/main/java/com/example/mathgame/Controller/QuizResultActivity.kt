@@ -1,4 +1,4 @@
-package com.example.mathgame
+package com.example.mathgame.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.example.mathgame.R
 import java.util.*
 import kotlin.collections.ArrayList
 

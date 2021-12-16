@@ -1,11 +1,11 @@
-package com.example.mathgame
+package com.example.mathgame.Controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.*
+import com.example.mathgame.R
 import com.example.mathgame.model.Answer
 import com.example.mathgame.model.Question
 import com.example.mathgame.model.QuestionPool
