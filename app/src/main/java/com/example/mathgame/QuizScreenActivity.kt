@@ -11,15 +11,17 @@ import com.example.mathgame.model.Question
 import com.example.mathgame.model.QuestionPool
 
 class QuizScreenActivity : AppCompatActivity() {
+    // Database specific variables
     private lateinit var questionPool: QuestionPool
     private lateinit var answerList: ArrayList<Answer>
     private lateinit var gameQuestions: ArrayList<Question>
     private lateinit var correctAnswer: Answer
 
+    // Game screen specific variables, all with a default value of 0
     var index: Int = 0
     var currentQuestionNo: Int = 0
     var currentQuestionID: Int = 0
-    var playerScore: Int = 0
+    companion object { var playerScore = 0}
 
     /**
      * Upon activity creation, the question pool is initialised with data obtained from the
@@ -80,12 +82,11 @@ class QuizScreenActivity : AppCompatActivity() {
 
                 populateRadioButtons()
 
-            } else { // If the last question is currently displayed
-                val message: String = playerScore.toString()
-                val intent = Intent(this, QuizResultActivity::class.java).apply {
-                    putExtra("PLAYER_SCORE", message)
-                }
-                startActivity(intent)
+            } else { // If the last question has been submitted
+                checkScore()
+
+                val intent = Intent(this, QuizResultActivity::class.java)
+                startActivity(intent) // Companion object used to obtain player score
             }
         } else // If the user has not selected a RadioButton
             Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
@@ -93,9 +94,6 @@ class QuizScreenActivity : AppCompatActivity() {
 
 
     /**
-     * Allows the radio buttons' text to be randomised on each question, with the correct option
-     * not being statically displayed throughout the session.
-     *
      * Iterates through all stored answers', extracting each answer where the answer's
      * questionNumberID matches the current question's number ID, adding each answer to a filtered
      * ArrayList.
@@ -149,8 +147,8 @@ class QuizScreenActivity : AppCompatActivity() {
     }
 
     /**
-     * Obtains the texts of the currently selected RadioButton and the current question's answer,
-     * and compares both values for equality.
+     * Obtains the text values of the currently selected RadioButton and the current question's answer,
+     * compareing both values for equality.
      *
      * If both String values are equal, the player score is incremented by 1, otherwise the
      * player's score remains unchanged.
@@ -162,14 +160,5 @@ class QuizScreenActivity : AppCompatActivity() {
         if (selectedOptionText.equals(correctAnswer.answerText))
             playerScore++
     }
-
-    //TODO - fix score issue
-
-    //        val correctAnswer: Answer = filteredAnswers.filter { it.isCorrect == 1 }[0]
-//        filteredAnswers.remove(correctAnswer)
-
-//    lateinit var gameAnswers: ArrayList<Answer>
-//    lateinit var questionList: ArrayList<Question>
-    //gameAnswers = questionPool.getQuestionAnswers()
 }
 

@@ -44,6 +44,7 @@
         android:id="@+id/buttonTeacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="startGameTeacher"
         android:text="@string/btn_teacher" />
 
 </LinearLayout>

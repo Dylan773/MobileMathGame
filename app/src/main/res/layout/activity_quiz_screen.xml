@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="193dp"
+        android:layout_height="209dp"
         android:orientation="vertical">
 
         <TextView
@@ -23,16 +23,22 @@
         <TextView
             android:id="@+id/textViewQuestionText"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="73dp"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="304dp"
-            android:layout_height="41dp"
+            android:layout_height="44dp"
             android:layout_gravity="center" />
 
         <TextView
@@ -47,7 +53,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="302dp">
+        android:layout_height="298dp">
 
         <RadioButton
             android:id="@+id/option1"
@@ -78,6 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
+
     </RadioGroup>
 
     <Button

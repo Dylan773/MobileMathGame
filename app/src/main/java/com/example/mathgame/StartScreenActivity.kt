@@ -28,15 +28,7 @@ class StartScreenActivity : AppCompatActivity() {
      *
      */
     fun startGameTeacher(view: View) {
-
+        val intent = Intent(this, QuizResultActivity::class.java)
+        startActivity(intent)
     }
-
-//    fun sendMessage(view: View) {
-//        val editText = findViewById<EditText>(R.id.editTextTextPersonName)
-//        val message = editText.text.toString()
-//        val intent = Intent(this, DisplayMessageActivity::class.java).apply {
-//            putExtra(AlarmClock.EXTRA_MESSAGE, message)
-//        }
-//        startActivity(intent)
-//    }
 }

@@ -20,9 +20,28 @@
     <TextView
         android:id="@+id/textViewPlayerOverview"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="41dp"
+        android:text="player score"
         android:textAlignment="center"
         android:textSize="16sp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:text="@string/info"
+        android:textAlignment="center" />
+
+    <com.anychart.AnyChartView
+        android:id="@+id/any_chart_view"
+        android:layout_width="377dp"
+        android:layout_height="347dp" />
 
     <Button
         android:id="@+id/buttonHome"
