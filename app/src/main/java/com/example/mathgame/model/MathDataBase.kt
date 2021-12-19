@@ -1,5 +1,6 @@
 package com.example.mathgame.model
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.SQLException
@@ -44,6 +45,13 @@ class MathDataBase(context: Context) :
     val column_UserName = "Username"
     val column_Password = "Password"
 
+    /* Student Table */
+    val studentTableName = "Student"
+    val studentColumn_ID = "ID"
+    val column_FirstNameStudent = "FirstName"
+    val column_Score = "Score"
+    val column_QuizDate = "QuizDate"
+
 
     /**
      *
@@ -75,6 +83,13 @@ class MathDataBase(context: Context) :
             sqlCreateStatement = "CREATE TABLE " + adminTableName + " ( " + adminColumn_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + column_FirstName + " TEXT NOT NULL, " + column_UserName + " TEXT NOT NULL, " +
                     column_Password + " TEXT NOT NULL )"
+
+            db?.execSQL(sqlCreateStatement)
+
+            // Answer Table )))))))
+            sqlCreateStatement = "CREATE TABLE " + studentTableName + " ( " + studentColumn_ID +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + column_FirstNameStudent + " TEXT NOT NULL, " + column_Score + " INT NOT NULL, " +
+                    column_QuizDate + " TEXT NOT NULL )"
 
             db?.execSQL(sqlCreateStatement)
 
@@ -173,37 +188,12 @@ class MathDataBase(context: Context) :
         return answerList
     }
 
-    fun getAllAdmins(): ArrayList<Admin> {
-        val adminList = ArrayList<Admin>()
-        val db: SQLiteDatabase = this.readableDatabase
-        val sqlStatement = "SELECT * FROM $adminTableName"
-
-        val cursor: Cursor = db.rawQuery(sqlStatement, null)
-
-        if (cursor.moveToFirst())
-            do {
-                val id: Int = cursor.getInt(0)
-                val firstName: String = cursor.getString(1)
-                val userName: String = cursor.getString(2)
-                val password: String = cursor.getString(3)
-
-                val a = Admin(id, firstName, userName, password)
-                adminList.add(a)
-            } while (cursor.moveToNext())
-
-        cursor.close()
-        db.close()
-
-        return adminList
-    }
-
-    fun getAdmin(admin: Admin) : Int {
+    fun getAdmin(admin: Admin): Int {
 
         val db: SQLiteDatabase
         try {
             db = this.readableDatabase
-        }
-        catch(e: SQLiteException) {
+        } catch (e: SQLiteException) {
             return -2 // Database error
         }
 
@@ -211,10 +201,11 @@ class MathDataBase(context: Context) :
         val userPassword = admin.password
         //val sqlStatement = "SELECT * FROM $TableName WHERE $Column_UserName = $userName AND $Column_Password = $userPassword"
 
-        val sqlStatement = "SELECT * FROM $adminTableName WHERE $column_UserName = ? AND $column_Password = ?"
-        val param = arrayOf(userName,userPassword)
-        val cursor: Cursor =  db.rawQuery(sqlStatement,param)
-        if(cursor.moveToFirst()){
+        val sqlStatement =
+            "SELECT * FROM $adminTableName WHERE $column_UserName = ? AND $column_Password = ?"
+        val param = arrayOf(userName, userPassword)
+        val cursor: Cursor = db.rawQuery(sqlStatement, param)
+        if (cursor.moveToFirst()) {
             // The user is found
             val n = cursor.getInt(0)
             cursor.close()
@@ -227,9 +218,50 @@ class MathDataBase(context: Context) :
         return -1 //User not found
 
     }
-}
 
+//    fun addQuestion(question: Question): Int {
+//        val isUserNameAlreadyExists =
+//            checkUserName(user) // check if the username is already exist in the database
+//        if (isUserNameAlreadyExists < 0)
+//            return isUserNameAlreadyExists
 //
-//    fun addQuestion() {
+//        // writableDatabase for insert actions
+//        val db: SQLiteDatabase = this.writableDatabase
+//        val cv: ContentValues = ContentValues()
 //
+//        cv.put(Column_FirstName, user.firstName)
+//        cv.put(Column_LastName, user.LastName)
+//        cv.put(Column_Age, user.age)
+//        cv.put(Column_Gender, user.gender)
+//        cv.put(Column_Address, user.address)
+//        cv.put(Column_UserName, user.userName.lowercase())
+//        cv.put(Column_Password, user.password)
+//
+//        val success = db.insert(TableName, null, cv)
+//
+//        db.close()
+//        if (success.toInt() == -1) return success.toInt() //Error, adding new user
+//        else return 1
 //    }
+
+    /**
+     * Validation isnt neccessary as multiple students can share the same first name.
+     */
+    fun addStudentRecord(student: Student): Int {
+
+        // writableDatabase for insert actions
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(column_FirstNameStudent, student.firstName)
+        cv.put(column_Score, student.score)
+        cv.put(column_QuizDate, student.quizDate)
+
+        val success = db.insert(studentTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1)
+            return success.toInt() //Error adding user score
+        else return 1
+    }
+}

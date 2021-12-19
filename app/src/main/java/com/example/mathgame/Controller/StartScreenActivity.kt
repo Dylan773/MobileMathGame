@@ -24,8 +24,8 @@ class StartScreenActivity : AppCompatActivity() {
      *
      */
     fun startGameTeacher(view: View) {
-        //val intent = Intent(this, QuizResultActivity::class.java)
-        val intent = Intent(this, AdminLoginActivity::class.java)
+        val intent = Intent(this, QuizResultActivity::class.java)
+        //val intent = Intent(this, AdminLoginActivity::class.java)
         startActivity(intent)
     }
 }

@@ -37,14 +37,12 @@ class StudentDetailActivity : AppCompatActivity() {
 
             // If name is not null, then start the next activity
             //val sName = studentName
-            val intent = Intent(this, QuizScreenActivity::class.java).apply {
-                putExtra("STUDENT_NAME", studentName)
-            }
+            val intent = Intent(this, QuizScreenActivity::class.java)
             startActivity(intent)
 
         } catch (exception: NullPointerException) {
-            val toast = Toast.makeText(this, exception.message, Toast.LENGTH_SHORT)
-            toast.show()
+            Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
+            //toast.show()
         }
     }
 }

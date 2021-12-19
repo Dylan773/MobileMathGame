@@ -15,7 +15,7 @@
         <entry key="app/src/main/res/layout/activity_quiz_end_screen.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_quiz_result.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_quiz_screen.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_start_screen.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/activity_start_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_detail.xml" value="0.335" />
       </map>
     </option>
