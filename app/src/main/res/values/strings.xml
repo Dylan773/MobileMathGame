@@ -13,7 +13,7 @@
     <string name="enterName">Please enter your name:</string>
     <string name="gameInfoSubtitle"><u>Game Information</u></string>
     <string name="game_description">Each game consists of 14 mathematical questions, covering 7 topics. Questions are presented in a multiple choice format, with only one correct answer.
-        \n\nEach question has a time limit, so make sure to answer before time is up! Please complete all questions as progress is not saved.
+        \n\nPlease complete all questions once started as progress is not saved.
         \n\nHave Fun!
     </string>
     <string name="btnStart">start</string>
@@ -40,6 +40,23 @@
 
 
     <!-- Admin Question Screen -->
+    <string name="addQuestion"><u>Add Question</u></string>
+    <string name="questionDesc"><u>Question Description</u></string>
+    <string name="answerDesc"><u>Answer Description</u></string>
+    <string name="questionTopic">1: Number/PlaceValue\t\t2: Addition/Subtraction
+    \n3: Multiplication/Division\t\t4: Fractions
+    \n5: Measurement\t\t6: Geometry/ShapeProperties
+    \n7: Geometry/PosAndDirection</string>
 
+    <string name="questionText">Question Text:</string>
+    <string name="questionTopicID">Question Topic (1-7):</string>
+    <string name="correctAnswer">Correct Answer Text:</string>
+    <string name="incorrectAns2">Option 2 Text:</string>
+    <string name="incorrectAns3">Option 3 Text:</string>
+    <string name="incorrectAns4">Option 4 Text:</string>
+    <string name="incorrectAns5">Option 5 Text:</string>
+
+
+    <string name="btn_Submit">Submit</string>
 
 </resources>

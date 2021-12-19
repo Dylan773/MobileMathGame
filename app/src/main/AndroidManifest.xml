@@ -10,25 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathGame">
         <activity
-            android:name=".Controller.AdminQuestionActivity"
+            android:name=".controller.AdminQuestionActivity"
+            android:exported="false"
+            android:parentActivityName=".controller.StartScreenActivity"/>
+        <activity
+            android:name=".controller.AdminLoginActivity"
+            android:exported="false"
+            android:parentActivityName=".controller.StartScreenActivity"/>
+        <activity
+            android:name=".controller.QuizResultActivity"
+            android:exported="false"
+            android:parentActivityName=".controller.StudentDetailActivity" />
+        <activity
+            android:name=".controller.QuizScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.AdminLoginActivity"
+            android:name=".controller.StudentDetailActivity"
             android:exported="false"
-            android:parentActivityName=".Controller.StartScreenActivity"/>
+            android:parentActivityName=".controller.StartScreenActivity" />
         <activity
-            android:name=".Controller.QuizResultActivity"
-            android:exported="false"
-            android:parentActivityName=".Controller.StudentDetailActivity" />
-        <activity
-            android:name=".Controller.QuizScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Controller.StudentDetailActivity"
-            android:exported="false"
-            android:parentActivityName=".Controller.StartScreenActivity" />
-        <activity
-            android:name=".Controller.StartScreenActivity"
+            android:name=".controller.StartScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

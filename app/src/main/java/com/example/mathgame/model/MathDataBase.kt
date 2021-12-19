@@ -219,25 +219,81 @@ class MathDataBase(context: Context) :
 
     }
 
+    //    val questionTableName = "Questions"
+//    val questionColumn_ID = "ID"
+//    val column_QuestionTypeID = "QuestionTypeID"
+//    val column_QuestionNumber = "QuestionNumber"
+//    val column_QuestionText = "QuestionText"
+    fun addQuestion(question: Question): Int {
+
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        cv.put(column_QuestionTypeID, question.questionTypeID)
+        cv.put(column_QuestionNumber, question.questionNumber)
+        cv.put(column_QuestionText, question.questionText)
+
+        val success = db.insert(questionTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() //Error, adding new user
+        else return 1
+    }
+
+//    val answerTableName = "Answers"
+//    val answerColumn_ID = "ID"
+//    val column_QuestionNumberID = "QuestionNumberID"
+//    val column_AnswerText = "AnswerText"
+//    val column_IsCorrect = "IsCorrect"
+
+    fun addAnswerOptions(option1: Answer, option2: Answer, option3: Answer, option4: Answer, option5: Answer): Int {
+
+        // Add each provided option to an ArrayList
+        val options = ArrayList<Answer>()
+        options.add(option1)
+        options.add(option2)
+        options.add(option3)
+        options.add(option4)
+        options.add(option5)
+
+        // Initialise database
+        val db: SQLiteDatabase = this.writableDatabase
+        val cv: ContentValues = ContentValues()
+
+        // For every answer provided, add this to a new row in the answers table
+        for (o in options) {
+            cv.put(column_QuestionNumberID, o.questionNumberID)
+            cv.put(column_AnswerText, o.answerText)
+            cv.put(column_IsCorrect, o.isCorrect)
+        }
+
+
+        val success = db.insert(questionTableName, null, cv)
+
+        db.close()
+        if (success.toInt() == -1) return success.toInt() //Error, adding new user
+        else return 1
+    }
+
 //    fun addQuestion(question: Question): Int {
-//        val isUserNameAlreadyExists =
-//            checkUserName(user) // check if the username is already exist in the database
-//        if (isUserNameAlreadyExists < 0)
-//            return isUserNameAlreadyExists
+////        val isUserNameAlreadyExists =
+////            checkUserName(user) // check if the username is already exist in the database
+////        if (isUserNameAlreadyExists < 0)
+////            return isUserNameAlreadyExists
 //
-//        // writableDatabase for insert actions
+//        //val db: SQLiteDatabase = writableDatabase for insert actions
 //        val db: SQLiteDatabase = this.writableDatabase
-//        val cv: ContentValues = ContentValues()
+//        val cv1: ContentValues = ContentValues()
 //
-//        cv.put(Column_FirstName, user.firstName)
-//        cv.put(Column_LastName, user.LastName)
-//        cv.put(Column_Age, user.age)
+//        cv1.put(Column_FirstName, user.firstName)
+//        cv1.put(Column_LastName, user.LastName)
+//        cv1.put(Column_Age, user.age)
 //        cv.put(Column_Gender, user.gender)
 //        cv.put(Column_Address, user.address)
 //        cv.put(Column_UserName, user.userName.lowercase())
 //        cv.put(Column_Password, user.password)
 //
-//        val success = db.insert(TableName, null, cv)
+//        val success = db.insert(questionTableName, null, cv1)
 //
 //        db.close()
 //        if (success.toInt() == -1) return success.toInt() //Error, adding new user
