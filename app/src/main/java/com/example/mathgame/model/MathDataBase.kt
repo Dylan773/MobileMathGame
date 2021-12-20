@@ -14,6 +14,8 @@ private const val VERSION_NUMBER = 1
 
 /**
  * Database Helper Class.
+ *
+ * @author Dylan Brand
  */
 class MathDataBase(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, VERSION_NUMBER) {
@@ -54,7 +56,7 @@ class MathDataBase(context: Context) :
 
 
     /**
-     * Upon creation, the database creates the below tables for application functionality.
+     * Upon creation, the database helper creates the below tables for application functionality.
      */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
@@ -105,7 +107,9 @@ class MathDataBase(context: Context) :
     }
 
     /**
-     * Returns all data in the QuestionID table.
+     * Returns all data in the databases QuestionID table.
+     *
+     * @return An ArrayList of QuestionID data.
      */
     fun getQuestionIDList(): ArrayList<QuestionID> {
         val questionIDList = ArrayList<QuestionID>()
@@ -132,7 +136,7 @@ class MathDataBase(context: Context) :
 
     /**
      * Executes a SQL statement, iterating through all data in the Questions table using a cursor.
-     * All data obtained from each row within the table is added to a data class to store the data.
+     * All data obtained from each row within the table is added to a data class to store that data.
      *
      * @return An ArrayList of all application questions.
      */
@@ -191,7 +195,12 @@ class MathDataBase(context: Context) :
     }
 
     /**
+     * Accepts an Admin object, comparing that admins username and password to data stored in the
+     * Admin table. If the username and password matches a record in the table, a positive integer
+     * is returned, highlighting a successful match.
      *
+     * @param admin The admin object to be comapred.
+     * @return An Int value, determine the success of a record match.
      */
     fun getAdmin(admin: Admin): Int {
 
@@ -227,6 +236,7 @@ class MathDataBase(context: Context) :
      * Accepts a question object, adding the unique values of that object to the corresponding
      * columns in a new database entry.
      *
+     * @param question The question to be added to the database.
      * @return An Int value, determining the success of the database addition.
      */
     fun addQuestion(question: Question): Int {
@@ -247,11 +257,13 @@ class MathDataBase(context: Context) :
 
     /**
      * Accepts five answer objects, adding the unique values of each object to the corresponding
-     * columns in each unique database entry.
+     * columns in the Answers table with each unique database entry. Inserts five unique answers
+     * to the Answers table.
      *
      * @return An Int value, determining the success of the database addition.
      */
-    fun addAnswerOptions(option1: Answer, option2: Answer, option3: Answer, option4: Answer, option5: Answer): Int {
+    fun addAnswerOptions(option1: Answer, option2: Answer, option3: Answer, option4: Answer,
+                         option5: Answer): Int {
         var success = 0L
 
         // Add each provided option to an ArrayList
@@ -280,9 +292,12 @@ class MathDataBase(context: Context) :
         else return 1
     }
 
-
     /**
-     * Validation isnt neccessary as multiple students can share the same first name.
+     * Accepts a student object as a parameter, adding that student data to the Student table
+     * within the database.
+     *
+     * @param student The student object to be added to the database
+     * @return An Int value, determining the success of the database addition.
      */
     fun addStudentRecord(student: Student): Int {
 

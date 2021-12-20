@@ -23,7 +23,10 @@ import kotlin.collections.ArrayList
  * Quiz result activity, that is created upon quiz completion. This activity displays text
  * alongside a pie chart, providing the user with information regarding their quiz session.
  *
- * @author Dylan Brand, P2523268
+ * Before this activity is closed, the students quiz session data is submitted and stored on the
+ * database.
+ *
+ * @author Dylan Brand
  */
 class QuizResultActivity : AppCompatActivity() {
     private val db = MathDataBase(this)
@@ -32,15 +35,19 @@ class QuizResultActivity : AppCompatActivity() {
 
     /**
      * Upon activity creation, a brief description of the user's overall score is displayed
-     * alongside a pie chart that provides a visual representation of the user's session data.
+     * alongside a pie chart, providing a visual representation of the user's session data.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_result)
 
+        // Converts the first char of the student name to uppercase
         val filteredName =
-            studentName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            studentName.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
 
+        // Displays the users name alongside their score out of 14
         val displayUserScore = "${filteredName}, you scored: ${finalScore}/14"
         findViewById<TextView>(R.id.textViewPlayerOverview).text = displayUserScore
 

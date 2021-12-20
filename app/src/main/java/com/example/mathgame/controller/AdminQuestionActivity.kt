@@ -14,7 +14,12 @@ import com.example.mathgame.model.QuestionPool
 import java.lang.NullPointerException
 import java.lang.NumberFormatException
 
-
+/**
+ * Admin Question Activity that allows an authorised admin to input new questions and answers to
+ * the database.
+ *
+ * @author Dylan Brand
+ */
 class AdminQuestionActivity : AppCompatActivity() {
     private lateinit var questionPool: QuestionPool
     private lateinit var answerList: ArrayList<Answer>
@@ -32,7 +37,6 @@ class AdminQuestionActivity : AppCompatActivity() {
     private var optionFour: String = ""
     private var optionFive: String = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_question)
@@ -41,15 +45,19 @@ class AdminQuestionActivity : AppCompatActivity() {
         questionPool = QuestionPool(this)
         gameQuestions = questionPool.setGameQuestions()
         answerList = questionPool.getAnswerList()
-
-
     }
 
-
-    // TODO - validation, no items can be null + RESET TEXT VIEWS
+    /**
+     * Upon activation of the submit button, all EditText's are checked for user input
+     * (String values). If one or more EditText's are null or out of bounds (QuestionTopicID),
+     * an exception is thrown and caught, informing the user via a prompt of the required action.
+     *
+     * If all user input is within bounds and is of an accepted data type, each question and five
+     * answers will be added to their respective tables within the database. Then all EditText's
+     * will be reset to null for new user input.
+     */
     fun buttonAdd(view: View) {
         val setNewQuestionNo = db.getAllQuestions().size + 1
-
 
         try {
             // Question Identifiers
@@ -65,9 +73,9 @@ class AdminQuestionActivity : AppCompatActivity() {
 
             // Catches invalid number input
             if (questionTopicText.toInt() !in 1..7)
-                throw NumberFormatException("Please enter a valid TopicID") // numberforat
+                throw InvalidNumberException("Please enter a valid TopicID")
 
-            // Catches empty input
+            // Catches empty input for topicID
             if (questionTopicText.isEmpty())
                 throw NullPointerException("TopicID cannot be empty")
 
@@ -85,38 +93,26 @@ class AdminQuestionActivity : AppCompatActivity() {
             // Create the question
             val question = Question(-1, questionTopicText.toInt(), setNewQuestionNo, questionText)
 
-            // Create the five options for the question
+            // Create the five answers for the question
             val correctOptionAns = Answer(-1, setNewQuestionNo, correctOption, 1)
             val optionAns2 = Answer(-1, setNewQuestionNo, optionTwo, 0)
             val optionAns3 = Answer(-1, setNewQuestionNo, optionThree, 0)
             val optionAns4 = Answer(-1, setNewQuestionNo, optionFour, 0)
             val optionAns5 = Answer(-1, setNewQuestionNo, optionFive, 0)
 
-            // Add the each record to their database
+            // Add each record to the corresponding tables in the database
             val questionResult = db.addQuestion(question)
             val answerResult = db.addAnswerOptions(
                 correctOptionAns, optionAns2, optionAns3,
                 optionAns4, optionAns5
             )
 
-            // Adding each question and answer to the database
+            // If the addition was successful, clear all EditText's for new input
             if (questionResult == 1 && answerResult == 1) {
                 Toast.makeText(this, "Question added successfully", Toast.LENGTH_LONG).show()
-
-                //TODO - clear fields
-                findViewById<EditText>(R.id.editTextQuestionText).setText("")
-                findViewById<EditText>(R.id.editTextQuestionTopic).setText("")
-
-                // Answer Identifiers
-                findViewById<EditText>(R.id.editTextCorrectAnswer).setText("")
-                findViewById<EditText>(R.id.editTexOption2).setText("")
-                findViewById<EditText>(R.id.editTextOption3).setText("")
-                findViewById<EditText>(R.id.editTextOption4).setText("")
-                findViewById<EditText>(R.id.editTextOption5).setText("")
-
+                resetUI()
             } else
                 Toast.makeText(this, "Error adding question", Toast.LENGTH_SHORT).show()
-
 
         } catch (exception: NullPointerException) {
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
@@ -127,20 +123,19 @@ class AdminQuestionActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Resets all EditText's on this activity to a default (empty) state.
+     */
+    private fun resetUI() {
+        // Clears all question EditText's upon question addition
+        findViewById<EditText>(R.id.editTextQuestionText).setText("")
+        findViewById<EditText>(R.id.editTextQuestionTopic).setText("")
+
+        // Clears all answer EditText's upon answer addition
+        findViewById<EditText>(R.id.editTextCorrectAnswer).setText("")
+        findViewById<EditText>(R.id.editTexOption2).setText("")
+        findViewById<EditText>(R.id.editTextOption3).setText("")
+        findViewById<EditText>(R.id.editTextOption4).setText("")
+        findViewById<EditText>(R.id.editTextOption5).setText("")
+    }
 }
-
-//    try {
-//        StudentDetailActivity.studentName = findViewById<EditText>(R.id.editTextStudentName).text.toString()
-//
-//        // Student name null check
-//        if (StudentDetailActivity.studentName.isEmpty())
-//            throw NullPointerException("Name not entered")
-//
-//        // If name is not null, then start the next activity
-//        val intent = Intent(this, QuizScreenActivity::class.java)
-//        startActivity(intent)
-//
-//    } catch (exception: NullPointerException) {
-//        Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
-//    }dfg      f
-

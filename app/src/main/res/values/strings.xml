@@ -20,6 +20,7 @@
 
     <!-- Game Screen Activity -->
     <string name="topic"><u>Topic!</u></string>
+    <string name="btn_QuizSubmit">Submit</string>
 
     <!-- Game End Activity -->
     <string name="resultTitle"><u>Quiz Complete</u></string>

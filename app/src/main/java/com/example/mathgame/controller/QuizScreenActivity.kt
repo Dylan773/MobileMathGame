@@ -13,6 +13,8 @@ import com.example.mathgame.model.QuestionPool
 /**
  * This applications quiz screen, prompting the user with a question and five randomised answers.
  * Obtaining all questions and answers from a database.
+ *
+ * @author Dylan Brand
  */
 class QuizScreenActivity : AppCompatActivity() {
     // Database specific variables
@@ -25,10 +27,7 @@ class QuizScreenActivity : AppCompatActivity() {
     var index: Int = 0
     var currentQuestionNo: Int = 0
     var currentQuestionID: Int = 0
-
-    companion object {
-        var playerScore = 0
-    }
+    companion object { var playerScore = 0 }
 
     /**
      * Upon activity creation, the question pool is initialised with data obtained from the
@@ -54,11 +53,13 @@ class QuizScreenActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewQuestionText).text =
             gameQuestions.get(index).questionText
 
+        // ProgressBar Initialisation
         findViewById<ProgressBar>(R.id.progressBar).max = gameQuestions.size
         findViewById<ProgressBar>(R.id.progressBar).setProgress(index + 1, true)
 
-        findViewById<TextView>(R.id.textViewQuestionCount).text =
-            "${index + 1}/${gameQuestions.size}"
+        val questionCount = "${index + 1}/${gameQuestions.size}"
+        findViewById<TextView>(R.id.textViewQuestionCount).text = questionCount
+            //"${index + 1}/${gameQuestions.size}"
 
         populateRadioButtons()
     }
@@ -105,7 +106,6 @@ class QuizScreenActivity : AppCompatActivity() {
             Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
     }
 
-
     /**
      * Iterates through all stored answers', extracting each answer where the answer's
      * questionNumberID matches the current question's number ID, adding each answer to a filtered
@@ -113,7 +113,7 @@ class QuizScreenActivity : AppCompatActivity() {
      *
      * The correct answer is then extracted and removed from the filtered list, and added to a new
      * options ArrayList, whereas the remaining filtered answers are shuffled and added to the
-     * new options list until the list has five elements (options).
+     * new options list until the list has five elements (answers).
      *
      * Finally, the game options ArrayList is shuffled to randomise the order of answers,
      * each RadioButton on the quiz screen is then populated respectively using the corresponding

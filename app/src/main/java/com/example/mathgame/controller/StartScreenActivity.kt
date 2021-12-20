@@ -8,6 +8,8 @@ import com.example.mathgame.R
 
 /**
  * This applications starting screen.
+ *
+ * @author Dylan Brand
  */
 class StartScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +31,6 @@ class StartScreenActivity : AppCompatActivity() {
      * input their login details, allowing them to add new game questions.
      */
     fun startGameTeacher(view: View) {
-        //val intent = Intent(this, QuizResultActivity::class.java)
         val intent = Intent(this, AdminLoginActivity::class.java)
         startActivity(intent)
     }

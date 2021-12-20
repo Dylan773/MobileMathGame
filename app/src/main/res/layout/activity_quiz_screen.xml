@@ -88,9 +88,9 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="buttonSubmit"
-        android:text="Button" />
+        android:text="@string/btn_QuizSubmit" />
 </LinearLayout>

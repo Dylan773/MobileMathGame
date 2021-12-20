@@ -2,15 +2,16 @@ package com.example.mathgame.model
 
 import android.content.Context
 
-
+/**
+ * Helper class that contains functions for easy access to database records.
+ *
+ * @author Dylan Brand
+ */
 class QuestionPool(context: Context) {
-
     private val dbHelper: MathDataBase = MathDataBase(context)
     private val questionIDList: ArrayList<QuestionID>
     private val questionList: ArrayList<Question>
     private val answerList: ArrayList<Answer>
-
-
 
     init {
         questionIDList = dbHelper.getQuestionIDList()
@@ -19,19 +20,13 @@ class QuestionPool(context: Context) {
     }
 
     /**
+     * Returns all answers stored in the Answers table.
      *
-     */
-    fun getQuestionList(): ArrayList<Question> {
-        return questionList
-    }
-
-    /**
-     *
+     * @return All application answers.
      */
     fun getAnswerList(): ArrayList<Answer> {
         return answerList
     }
-
 
     /**
      * Accepts a questionID (Int) value, returning the relevant question's topic description.
@@ -46,7 +41,6 @@ class QuestionPool(context: Context) {
         // ArrayList starts at index 0 so - 1
         return questionIDList.get(questionID - 1).questionDescription
     }
-
 
     /**
      * Accepts a questionTopicID (Int) value for comparison.
@@ -77,8 +71,14 @@ class QuestionPool(context: Context) {
         return choseQuestion
     }
 
-
     /**
+     * Sets the game questions for the current quiz session, extracting 14 questions
+     * (2 questions per topic) for user interaction.
+     *
+     * Uses a helper function to extract relevant questions, adding each question to an ArrayList.
+     * The ArrayList is then shuffled and returned, providing users with a random order of
+     * questions.
+     *
      * @return An ArrayList containing 14 randomised questions, 2 per topic
      * @see addRandomQuestionByTopic
      */
