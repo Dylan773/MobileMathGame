@@ -50,13 +50,8 @@
 
     <string name="questionText">Question Text:</string>
     <string name="questionTopicID">Question Topic (1-7):</string>
-    <string name="correctAnswer">Correct Answer Text:</string>
-    <string name="incorrectAns2">Option 2 Text:</string>
-    <string name="incorrectAns3">Option 3 Text:</string>
-    <string name="incorrectAns4">Option 4 Text:</string>
-    <string name="incorrectAns5">Option 5 Text:</string>
-
-
+    <string name="correctAnswer">Correct Answer:</string>
+    <string name="incorrectAnswer">Incorrect Answer:</string>
     <string name="btn_Submit">Submit</string>
 
 </resources>

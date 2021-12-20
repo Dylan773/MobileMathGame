@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/textViewAddQuestion"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="wrap_content"
         android:text="@string/addQuestion"
         android:textAlignment="center"
         android:textSize="34sp" />
@@ -43,7 +43,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
         android:orientation="horizontal">
 
         <TextView
@@ -51,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/questionTopicID" />
+            android:text="@string/questionTopicID"
+            android:textAlignment="center" />
 
         <EditText
             android:id="@+id/editTextQuestionTopic"
@@ -59,21 +60,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/textViewQuestionIDs"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="98dp"
         android:text="@string/questionTopic"
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="match_parent"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:text="@string/answerDesc"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -110,10 +112,10 @@
 
         <TextView
             android:id="@+id/textViewOption2"
-            android:layout_width="wrap_content"
+            android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/incorrectAns2"
+            android:text="@string/incorrectAnswer"
             android:textAlignment="center" />
 
         <EditText
@@ -134,10 +136,10 @@
 
         <TextView
             android:id="@+id/textViewOption3"
-            android:layout_width="wrap_content"
+            android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/incorrectAns3"
+            android:text="@string/incorrectAnswer"
             android:textAlignment="center" />
 
         <EditText
@@ -158,10 +160,10 @@
 
         <TextView
             android:id="@+id/textViewOption4"
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/incorrectAns4"
+            android:text="@string/incorrectAnswer"
             android:textAlignment="center" />
 
         <EditText
@@ -182,10 +184,10 @@
 
         <TextView
             android:id="@+id/textViewOption5"
-            android:layout_width="wrap_content"
+            android:layout_width="56dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/incorrectAns5"
+            android:text="@string/incorrectAnswer"
             android:textAlignment="center" />
 
         <EditText
@@ -205,6 +207,6 @@
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:onClick="buttonAdd"
-        android:text="Button" />
+        android:text="@string/btn_Submit" />
 
 </LinearLayout>
