@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.mathgame.InvalidNumberException
 import com.example.mathgame.R
 import com.example.mathgame.model.Answer
 import com.example.mathgame.model.MathDataBase
@@ -25,7 +26,7 @@ class AdminQuestionActivity : AppCompatActivity() {
 
     // Question Identifiers
     private lateinit var questionText: String
-    private lateinit var questionTopic: String
+    private var questionTopic: Int = 0
 
     // Answer Identifiers
     private lateinit var correctOption: String
@@ -44,9 +45,26 @@ class AdminQuestionActivity : AppCompatActivity() {
         gameQuestions = questionPool.setGameQuestions()
         answerList = questionPool.getAnswerList()
 
+//        // Question Identifiers
+//        questionText = findViewById<EditText>(R.id.editTextQuestionText).text.toString()
+//        questionTopic = findViewById<EditText>(R.id.editTextQuestionTopic).text.toString().toInt()
+//
+//        // Answer Identifiers
+//        correctOption = findViewById<EditText>(R.id.editTextCorrectAnswer).text.toString()
+//        optionTwo = findViewById<EditText>(R.id.editTexOption2).text.toString()
+//        optionThree = findViewById<EditText>(R.id.editTextOption3).text.toString()
+//        optionFour = findViewById<EditText>(R.id.editTextOption4).text.toString()
+//        optionFive = findViewById<EditText>(R.id.editTextOption5).text.toString()
+    }
+
+    // TODO - validation, no items can be null + RESET TEXT VIEWS
+    fun buttonAdd(view: View) {
+        val setNewQuestionNo = db.getAllQuestions().size + 1
+            //questionPool.getQuestionList().size + 1
+
         // Question Identifiers
         questionText = findViewById<EditText>(R.id.editTextQuestionText).text.toString()
-        questionTopic = findViewById<EditText>(R.id.editTextQuestionTopic).text.toString()
+        questionTopic = findViewById<EditText>(R.id.editTextQuestionTopic).text.toString().toInt()
 
         // Answer Identifiers
         correctOption = findViewById<EditText>(R.id.editTextCorrectAnswer).text.toString()
@@ -54,18 +72,16 @@ class AdminQuestionActivity : AppCompatActivity() {
         optionThree = findViewById<EditText>(R.id.editTextOption3).text.toString()
         optionFour = findViewById<EditText>(R.id.editTextOption4).text.toString()
         optionFive = findViewById<EditText>(R.id.editTextOption5).text.toString()
-    }
-
-    // TODO - validation, no items can be null
-    fun buttonAdd(view: View) {
-        val setNewQuestionNo = questionPool.getQuestionList().size + 1
 
         try {
-            if (viewIsEmpty())
-                throw NullPointerException("Please fill all fields")
+//            if (viewIsEmpty())
+//                throw NullPointerException("Please fill all fields")
 
-            if (questionTopic < 1.toString() || questionTopic > 7.toString())
-                throw NumberFormatException("Please enter a topic number between 1 and 7")
+//            if (questionTopic < 1 || questionTopic > 7)
+//                throw NumberFormatException("Please enter a topic number between 1 and 7")
+
+            if (questionTopic.toInt() < 1 || questionTopic.toInt() > 7)
+                throw InvalidNumberException("Please enter a topic number between 1 and 7")
 
             // Create the question
             val question = Question(-1, questionTopic.toInt(), setNewQuestionNo, questionText)
@@ -88,36 +104,29 @@ class AdminQuestionActivity : AppCompatActivity() {
                 Toast.makeText(this, "Question added successfully", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(this, "Error adding question", Toast.LENGTH_SHORT).show()
+
+
+
         } catch (exception: NullPointerException) {
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
         } catch (exception: NumberFormatException) {
             Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
+        } catch (exception: InvalidNumberException) {
+            Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
         }
-
-
-//        when (questionResult) {
-//            1 -> {
-//                Toast.makeText(this, "Submitting record", Toast.LENGTH_SHORT).show()
-//
-//                // Creates a 1.5s delay between screen transition
-//                val handler = Handler(Looper.getMainLooper())
-//                handler.postDelayed({
-//                    val intent = Intent(this, StartScreenActivity::class.java)
-//                    startActivity(intent)
-//                }, 1500)
-//            }
-//            -1 -> Toast.makeText(this, "Error submitting record", Toast.LENGTH_SHORT).show()
-//        }
-
-
     }
+
+//    fun buttonAdd(view: View) {
+//        Toast.makeText(this, db.getAllQuestions().size.toString(), Toast.LENGTH_LONG).show()
+//        //questionPool.getQuestionList().lastIndex
+//    }
 
     private fun viewIsEmpty(): Boolean {
         var b = false
 
         // Question
         if (questionText.isEmpty()) b = true
-        if (questionTopic.isEmpty()) b = true
+        if (questionTopic.toString().isEmpty()) b = true
 
         // Answers
         if (correctOption.isEmpty()) b = true

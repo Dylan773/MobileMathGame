@@ -13,7 +13,7 @@ private const val DATABASE_NAME = "MobileAppDatabase.db"
 private const val VERSION_NUMBER = 1
 
 /**
- *
+ * Database Helper Class.
  */
 class MathDataBase(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, VERSION_NUMBER) {
@@ -54,7 +54,7 @@ class MathDataBase(context: Context) :
 
 
     /**
-     *
+     * Upon creation, the database creates the below tables for application functionality.
      */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
@@ -105,7 +105,7 @@ class MathDataBase(context: Context) :
     }
 
     /**
-     *
+     * Returns all data in the QuestionID table.
      */
     fun getQuestionIDList(): ArrayList<QuestionID> {
         val questionIDList = ArrayList<QuestionID>()
@@ -130,12 +130,11 @@ class MathDataBase(context: Context) :
         return questionIDList
     }
 
-    fun getQ() {
-
-    }
-
     /**
+     * Executes a SQL statement, iterating through all data in the Questions table using a cursor.
+     * All data obtained from each row within the table is added to a data class to store the data.
      *
+     * @return An ArrayList of all application questions.
      */
     fun getAllQuestions(): ArrayList<Question> {
         val questionList = ArrayList<Question>()
@@ -162,7 +161,10 @@ class MathDataBase(context: Context) :
     }
 
     /**
+     * Executes a SQL statement, iterating through all data in the Answers table using a cursor.
+     * All data obtained from each row within the table is added to a data class to store the data.
      *
+     * @return An ArrayList of all application answers.
      */
     fun getAllAnswers(): ArrayList<Answer> {
         val answerList = ArrayList<Answer>()
@@ -188,6 +190,9 @@ class MathDataBase(context: Context) :
         return answerList
     }
 
+    /**
+     *
+     */
     fun getAdmin(admin: Admin): Int {
 
         val db: SQLiteDatabase
@@ -199,7 +204,6 @@ class MathDataBase(context: Context) :
 
         val userName = admin.userName.lowercase()
         val userPassword = admin.password
-        //val sqlStatement = "SELECT * FROM $TableName WHERE $Column_UserName = $userName AND $Column_Password = $userPassword"
 
         val sqlStatement =
             "SELECT * FROM $adminTableName WHERE $column_UserName = ? AND $column_Password = ?"
@@ -219,11 +223,12 @@ class MathDataBase(context: Context) :
 
     }
 
-    //    val questionTableName = "Questions"
-//    val questionColumn_ID = "ID"
-//    val column_QuestionTypeID = "QuestionTypeID"
-//    val column_QuestionNumber = "QuestionNumber"
-//    val column_QuestionText = "QuestionText"
+    /**
+     * Accepts a question object, adding the unique values of that object to the corresponding
+     * columns in a new database entry.
+     *
+     * @return An Int value, determining the success of the database addition.
+     */
     fun addQuestion(question: Question): Int {
 
         val db: SQLiteDatabase = this.writableDatabase
@@ -240,13 +245,14 @@ class MathDataBase(context: Context) :
         else return 1
     }
 
-//    val answerTableName = "Answers"
-//    val answerColumn_ID = "ID"
-//    val column_QuestionNumberID = "QuestionNumberID"
-//    val column_AnswerText = "AnswerText"
-//    val column_IsCorrect = "IsCorrect"
-
+    /**
+     * Accepts five answer objects, adding the unique values of each object to the corresponding
+     * columns in each unique database entry.
+     *
+     * @return An Int value, determining the success of the database addition.
+     */
     fun addAnswerOptions(option1: Answer, option2: Answer, option3: Answer, option4: Answer, option5: Answer): Int {
+        var success = 0L
 
         // Add each provided option to an ArrayList
         val options = ArrayList<Answer>()
@@ -256,49 +262,24 @@ class MathDataBase(context: Context) :
         options.add(option4)
         options.add(option5)
 
-        // Initialise database
-        val db: SQLiteDatabase = this.writableDatabase
-        val cv: ContentValues = ContentValues()
-
         // For every answer provided, add this to a new row in the answers table
         for (o in options) {
+
+            val db: SQLiteDatabase = this.writableDatabase
+            val cv: ContentValues = ContentValues()
+
             cv.put(column_QuestionNumberID, o.questionNumberID)
             cv.put(column_AnswerText, o.answerText)
             cv.put(column_IsCorrect, o.isCorrect)
+
+            success = db.insert(answerTableName, null, cv)
+            db.close()
         }
 
-
-        val success = db.insert(questionTableName, null, cv)
-
-        db.close()
         if (success.toInt() == -1) return success.toInt() //Error, adding new user
         else return 1
     }
 
-//    fun addQuestion(question: Question): Int {
-////        val isUserNameAlreadyExists =
-////            checkUserName(user) // check if the username is already exist in the database
-////        if (isUserNameAlreadyExists < 0)
-////            return isUserNameAlreadyExists
-//
-//        //val db: SQLiteDatabase = writableDatabase for insert actions
-//        val db: SQLiteDatabase = this.writableDatabase
-//        val cv1: ContentValues = ContentValues()
-//
-//        cv1.put(Column_FirstName, user.firstName)
-//        cv1.put(Column_LastName, user.LastName)
-//        cv1.put(Column_Age, user.age)
-//        cv.put(Column_Gender, user.gender)
-//        cv.put(Column_Address, user.address)
-//        cv.put(Column_UserName, user.userName.lowercase())
-//        cv.put(Column_Password, user.password)
-//
-//        val success = db.insert(questionTableName, null, cv1)
-//
-//        db.close()
-//        if (success.toInt() == -1) return success.toInt() //Error, adding new user
-//        else return 1
-//    }
 
     /**
      * Validation isnt neccessary as multiple students can share the same first name.
