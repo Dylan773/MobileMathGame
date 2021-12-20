@@ -1,15 +1,21 @@
-package com.example.mathgame
+package com.example.mathgame.controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.*
+import com.example.mathgame.R
 import com.example.mathgame.model.Answer
 import com.example.mathgame.model.Question
 import com.example.mathgame.model.QuestionPool
 
+/**
+ * This applications quiz screen, prompting the user with a question and five randomised answers.
+ * Obtaining all questions and answers from a database.
+ *
+ * @author Dylan Brand
+ */
 class QuizScreenActivity : AppCompatActivity() {
     // Database specific variables
     private lateinit var questionPool: QuestionPool
@@ -21,7 +27,7 @@ class QuizScreenActivity : AppCompatActivity() {
     var index: Int = 0
     var currentQuestionNo: Int = 0
     var currentQuestionID: Int = 0
-    companion object { var playerScore = 0}
+    companion object { var playerScore = 0 }
 
     /**
      * Upon activity creation, the question pool is initialised with data obtained from the
@@ -47,17 +53,25 @@ class QuizScreenActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewQuestionText).text =
             gameQuestions.get(index).questionText
 
+        // ProgressBar Initialisation
         findViewById<ProgressBar>(R.id.progressBar).max = gameQuestions.size
         findViewById<ProgressBar>(R.id.progressBar).setProgress(index + 1, true)
 
-        findViewById<TextView>(R.id.textViewQuestionCount).text =
-            "${index + 1}/${gameQuestions.size}"
+        val questionCount = "${index + 1}/${gameQuestions.size}"
+        findViewById<TextView>(R.id.textViewQuestionCount).text = questionCount
+            //"${index + 1}/${gameQuestions.size}"
 
         populateRadioButtons()
     }
 
     /**
-     * Nested if statement
+     * Upon click of the submit button, if the user has not selected an option from the radio group
+     * a message is displayed to the user prompting them to select one of the five options.
+     *
+     * If the user has selected an option, the selected option's string value is then compared to
+     * the current question's correct answer string value, once the answer is checked the next
+     * question is displayed to the user. Finally, if the last is currently displayed, the user
+     * will be transitioned to the Quiz Result Activity.
      */
     fun buttonSubmit(view: View) {
         if (findViewById<RadioGroup>(R.id.radioGroup).checkedRadioButtonId != -1) { // if an option has been selected
@@ -92,7 +106,6 @@ class QuizScreenActivity : AppCompatActivity() {
             Toast.makeText(this, "Please select an option", Toast.LENGTH_SHORT).show()
     }
 
-
     /**
      * Iterates through all stored answers', extracting each answer where the answer's
      * questionNumberID matches the current question's number ID, adding each answer to a filtered
@@ -100,7 +113,7 @@ class QuizScreenActivity : AppCompatActivity() {
      *
      * The correct answer is then extracted and removed from the filtered list, and added to a new
      * options ArrayList, whereas the remaining filtered answers are shuffled and added to the
-     * new options list until the list has five elements (options).
+     * new options list until the list has five elements (answers).
      *
      * Finally, the game options ArrayList is shuffled to randomise the order of answers,
      * each RadioButton on the quiz screen is then populated respectively using the corresponding
@@ -111,7 +124,7 @@ class QuizScreenActivity : AppCompatActivity() {
 
         // Iterates through all application answers, extracting answers only applicable to the current question
         for (ans in answerList)
-            if (ans.questionNumberID == gameQuestions.get(index).questionNumber)
+            if (ans.questionNumberID == gameQuestions[index].questionNumber)
                 filteredAnswers.add(ans)
         filteredAnswers.shuffle() // Randomises all filtered answers
 
@@ -137,18 +150,17 @@ class QuizScreenActivity : AppCompatActivity() {
         findViewById<RadioButton>(R.id.option3).text = setAnswerOptions[2].answerText
         findViewById<RadioButton>(R.id.option4).text = setAnswerOptions[3].answerText
         findViewById<RadioButton>(R.id.option5).text = setAnswerOptions[4].answerText
+    }
 
-//        val answersMap = mapOf(
+    //        val answersMap = mapOf(
 //            "one" to filteredAnswers[0].answerText, "two" to filteredAnswers[1].answerText,
 //            "three" to filteredAnswers[2].answerText, "four" to filteredAnswers[3].answerText,
 //            "five" to filteredAnswers[4].answerText, "six" to filteredAnswers[5].answerText,
 //            "seven" to filteredAnswers[6].answerText, "eight" to filteredAnswers[7].answerText
 //        )
-    }
-
     /**
      * Obtains the text values of the currently selected RadioButton and the current question's answer,
-     * compareing both values for equality.
+     * comparing both values for equality.
      *
      * If both String values are equal, the player score is incremented by 1, otherwise the
      * player's score remains unchanged.
@@ -161,4 +173,3 @@ class QuizScreenActivity : AppCompatActivity() {
             playerScore++
     }
 }
-

@@ -1,32 +1,32 @@
-package com.example.mathgame
+package com.example.mathgame.controller
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.mathgame.R
 import java.lang.NullPointerException
 
 /**
+ * Activity that prompts the user to input their first name for this game sessions. Whilst
+ * highlighting the key components of the application and how to play the quiz.
  *
+ * @author Dylan Brand
  */
 class StudentDetailActivity : AppCompatActivity() {
-    //var studentName: String = ""
     companion object { var studentName = "" }
-    /**
-     *
-     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_detail)
     }
 
-    //TODO - change the description (timer) if not implemented
     /**
-     *
+     * Checks if the user has input a name, validating that the name is not null.
+     * Once a valid name has been input, the user is transitioned to the Quiz Screen Activity,
+     * starting the quiz session.
      */
     fun startGame(view: View) {
         try {
@@ -37,20 +37,11 @@ class StudentDetailActivity : AppCompatActivity() {
                 throw NullPointerException("Name not entered")
 
             // If name is not null, then start the next activity
-            //val sName = studentName
-            val intent = Intent(this, QuizScreenActivity::class.java).apply {
-                putExtra("STUDENT_NAME", studentName)
-            }
+            val intent = Intent(this, QuizScreenActivity::class.java)
             startActivity(intent)
 
         } catch (exception: NullPointerException) {
-            val toast = Toast.makeText(this, exception.message, Toast.LENGTH_SHORT)
-            toast.show()
+            Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
         }
     }
 }
-//val message: String = playerScore.toString()
-//val intent = Intent(this, QuizResultActivity::class.java).apply {
-//    putExtra(AlarmClock.EXTRA_MESSAGE, message)
-//}
-//startActivity(intent)

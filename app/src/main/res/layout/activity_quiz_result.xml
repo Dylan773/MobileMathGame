@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".QuizResultActivity">
+    tools:context=".controller.QuizResultActivity">
 
     <TextView
         android:id="@+id/textViewResultTitle"
