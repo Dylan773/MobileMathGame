@@ -24,9 +24,9 @@ class QuizScreenActivity : AppCompatActivity() {
     private lateinit var correctAnswer: Answer
 
     // Game screen specific variables, all with a default value of 0
-    var index: Int = 0
-    var currentQuestionNo: Int = 0
-    var currentQuestionID: Int = 0
+    private var index: Int = 0
+    private var currentQuestionNo: Int = 0
+    private var currentQuestionID: Int = 0
 
     companion object { var playerScore = 0 }
 
@@ -46,6 +46,10 @@ class QuizScreenActivity : AppCompatActivity() {
         // Question Identifiers
         currentQuestionID = gameQuestions.get(index).questionTypeID
         currentQuestionNo = gameQuestions.get(index).questionNumber
+
+        /* Forces the score to zero upon activity start/restart,
+        useful if the user tries to go back using non app controls or emulator crashes */
+        playerScore = 0
 
         /* Display Initial Question */
         findViewById<TextView>(R.id.textViewCurrentTopic).text =
