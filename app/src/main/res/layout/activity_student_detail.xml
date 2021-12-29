@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="93dp"
         android:orientation="vertical">
 
         <TextView
@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="122dp"
+        android:layout_height="138dp"
         android:orientation="vertical">
 
         <TextView
@@ -64,13 +64,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="317dp"
+        android:layout_height="333dp"
         android:orientation="vertical">
 
         <TextView
@@ -85,7 +87,7 @@
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="252dp"
             android:text="@string/game_description"
             android:textAlignment="center" />
 

@@ -76,6 +76,7 @@ class QuizResultActivity : AppCompatActivity() {
 
         // Add the current student's session data to the database
         val student = Student(-1, studentName, finalScore, date)
+
         val result = db.addStudentRecord(student)
         when (result) {
             1 -> {

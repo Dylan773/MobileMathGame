@@ -21,39 +21,38 @@ class MathDataBase(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, VERSION_NUMBER) {
 
     /* QuestionID Table */
-    val questionIDTableName = "QuestionID"
-    val questionIDColumn_ID = "ID"
-    val column_QuestionType = "QuestionType"
-    val column_QuestionDescription = "Description"
+    private val questionIDTableName = "QuestionID"
+    private val questionIDColumn_ID = "ID"
+    private val column_QuestionType = "QuestionType"
+    private val column_QuestionDescription = "Description"
 
     /* Question Table */
-    val questionTableName = "Questions"
-    val questionColumn_ID = "ID"
-    val column_QuestionTypeID = "QuestionTypeID"
-    val column_QuestionNumber = "QuestionNumber"
-    val column_QuestionText = "QuestionText"
+    private val questionTableName = "Questions"
+    private val questionColumn_ID = "ID"
+    private val column_QuestionTypeID = "QuestionTypeID"
+    private val column_QuestionNumber = "QuestionNumber"
+    private val column_QuestionText = "QuestionText"
 
     /* Answer Table */
-    val answerTableName = "Answers"
-    val answerColumn_ID = "ID"
-    val column_QuestionNumberID = "QuestionNumberID"
-    val column_AnswerText = "AnswerText"
-    val column_IsCorrect = "IsCorrect"
+    private val answerTableName = "Answers"
+    private val answerColumn_ID = "ID"
+    private val column_QuestionNumberID = "QuestionNumberID"
+    private val column_AnswerText = "AnswerText"
+    private val column_IsCorrect = "IsCorrect"
 
     /* Admin Table */
-    val adminTableName = "Admin"
-    val adminColumn_ID = "ID"
-    val column_FirstName = "AdminFirstName"
-    val column_UserName = "Username"
-    val column_Password = "Password"
+    private val adminTableName = "Admin"
+    private val adminColumn_ID = "ID"
+    private val column_FirstName = "AdminFirstName"
+    private val column_UserName = "Username"
+    private val column_Password = "Password"
 
     /* Student Table */
-    val studentTableName = "Student"
-    val studentColumn_ID = "ID"
-    val column_FirstNameStudent = "FirstName"
-    val column_Score = "Score"
-    val column_QuizDate = "QuizDate"
-
+    private val studentTableName = "Student"
+    private val studentColumn_ID = "ID"
+    private val column_FirstNameStudent = "FirstName"
+    private val column_Score = "Score"
+    private val column_QuizDate = "QuizDate"
 
     /**
      * Upon creation, the database helper creates the below tables for application functionality.

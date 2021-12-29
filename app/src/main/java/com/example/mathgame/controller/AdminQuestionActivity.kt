@@ -2,6 +2,8 @@ package com.example.mathgame.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -52,7 +54,7 @@ class AdminQuestionActivity : AppCompatActivity() {
      * (String values). If one or more EditText's are null or out of bounds (QuestionTopicID),
      * an exception is thrown and caught, informing the user via a prompt of the required action.
      *
-     * If all user input is within bounds and is of an accepted data type, each question and five
+     * If all user input is within bounds and is of an accepted data type, each question and
      * answers will be added to their respective tables within the database. Then all EditText's
      * will be reset to null for new user input.
      */
@@ -90,7 +92,7 @@ class AdminQuestionActivity : AppCompatActivity() {
                     throw NullPointerException("Complete all fields")
             }
 
-            // Create the question
+            // Create the question if validation is complete
             val question = Question(-1, questionTopicText.toInt(), setNewQuestionNo, questionText)
 
             // Create the five answers for the question
@@ -109,8 +111,13 @@ class AdminQuestionActivity : AppCompatActivity() {
 
             // If the addition was successful, clear all EditText's for new input
             if (questionResult == 1 && answerResult == 1) {
-                Toast.makeText(this, "Question added successfully", Toast.LENGTH_LONG).show()
-                resetUI()
+                Toast.makeText(this, "Adding Question", Toast.LENGTH_LONG).show()
+
+                // Creates a 1.5s delay whilst adding record, and resets this screens UI
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed({
+                    resetUI()
+                }, 1500)
             } else
                 Toast.makeText(this, "Error adding question", Toast.LENGTH_SHORT).show()
 

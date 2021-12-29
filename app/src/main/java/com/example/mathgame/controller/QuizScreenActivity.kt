@@ -12,7 +12,7 @@ import com.example.mathgame.model.QuestionPool
 
 /**
  * This applications quiz screen, prompting the user with a question and five randomised answers.
- * Obtaining all questions and answers from a database.
+ * Obtaining all questions and answers from an SQLite database.
  *
  * @author Dylan Brand
  */
@@ -27,6 +27,7 @@ class QuizScreenActivity : AppCompatActivity() {
     var index: Int = 0
     var currentQuestionNo: Int = 0
     var currentQuestionID: Int = 0
+
     companion object { var playerScore = 0 }
 
     /**
@@ -59,7 +60,6 @@ class QuizScreenActivity : AppCompatActivity() {
 
         val questionCount = "${index + 1}/${gameQuestions.size}"
         findViewById<TextView>(R.id.textViewQuestionCount).text = questionCount
-            //"${index + 1}/${gameQuestions.size}"
 
         populateRadioButtons()
     }
@@ -91,8 +91,8 @@ class QuizScreenActivity : AppCompatActivity() {
 
                 findViewById<ProgressBar>(R.id.progressBar).progress = index + 1
 
-                findViewById<TextView>(R.id.textViewQuestionCount).text =
-                    "${index + 1}/${gameQuestions.size}"
+                val questionCount = "${index + 1}/${gameQuestions.size}"
+                findViewById<TextView>(R.id.textViewQuestionCount).text = questionCount
 
                 populateRadioButtons()
 

@@ -18,7 +18,7 @@ class StartScreenActivity : AppCompatActivity() {
     }
 
     /**
-     * Upon click, transitions the user (student) to the Student Detail Activity, prompting the user
+     * Upon click, transitions the user to the Student Detail Activity, prompting the user
      * to input their name before quiz start.
      */
     fun startGameStudent(view: View) {
@@ -27,8 +27,8 @@ class StartScreenActivity : AppCompatActivity() {
     }
 
     /**
-     * Upon click, transitions the user (teacher) to the Admin Login Activity, prompting the user to
-     * input their login details, allowing them to add new game questions.
+     * Upon click, transitions the user to the Admin Login Activity, prompting the user to
+     * input their login details.
      */
     fun startGameTeacher(view: View) {
         val intent = Intent(this, AdminLoginActivity::class.java)
