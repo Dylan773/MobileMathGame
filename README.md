@@ -5,6 +5,4 @@ This application was developed using the Kotlin programming language using the A
 
 This application aims to provide year-one primary school pupils with a fun, supplement learning activity; prompting a set of 14 multiple choice questions per game cycle. Upon start of each quiz session, 14 randomily chosen questions (2 per topic) are obtained via an SQLite question pool with over 50 questions.
 
-Game and user validation exists, reducing the liklihood of any potential bugs or exploits.
-
-Please see the wiki for application screenshots taken throughout a quiz session.
+Please see the wiki for game information and application screenshots taken throughout a quiz session.
