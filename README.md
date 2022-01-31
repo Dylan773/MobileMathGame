@@ -1,5 +1,4 @@
 # MobileMathGame
-The repository for the CTEC3911: Mobile Application Development module.
 
 This application was developed using the Kotlin programming language using the Adnroid Studio IDE, following an MVC design.
 
